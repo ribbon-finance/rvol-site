@@ -73,7 +73,7 @@ function App() {
         </Row>
 
         <Row>
-          <Col offset={1} span={5}>
+          <Col offset={1} span={12}>
             <OptionsPricer></OptionsPricer>
           </Col>
         </Row>
