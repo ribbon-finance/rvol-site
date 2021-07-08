@@ -25,17 +25,23 @@ function App() {
 
           {Object.values(oracles).map((oracle, index) => {
             const pools = Object.keys(oracles) as Pools[];
-            const { decimals, name, quoteAsset } =
+            const { decimals, name, quoteAsset, icon } =
               ORACLE_METADATA[pools[index]];
 
             return (
               <Col span={5}>
-                <Card title={name} style={{ width: "90%" }}>
+                <Card
+                  title={name}
+                  style={{ width: "90%" }}
+                  extra={
+                    <img style={{ width: 30 }} src={icon} alt={name}></img>
+                  }
+                >
                   <div>
                     Historical volatility (annualized):{" "}
-                    {parseFloat(formatUnits(oracle.annualizedVol, 8)).toFixed(
-                      2
-                    )}
+                    {(
+                      parseFloat(formatUnits(oracle.annualizedVol, 8)) * 100
+                    ).toFixed(2)}
                     %
                   </div>
                   <div>

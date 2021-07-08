@@ -2,6 +2,8 @@ import useProvider from "./useProvider";
 import VolOracleABI from "../abis/VolOracle.json";
 import { BigNumber, ethers } from "ethers";
 import { useEffect, useState } from "react";
+import ETH_ICON from "../img/eth.png";
+import BTC_ICON from "../img/btc.png";
 
 const VOL_ORACLE = "0x8eB47e59E0C03A7D1BFeaFEe6b85910Cefd0ee99";
 const USDCETH_POOL = "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8";
@@ -14,11 +16,13 @@ export const ORACLE_METADATA = {
     name: "USDC/ETH Pool",
     decimals: 18,
     quoteAsset: "ETH",
+    icon: ETH_ICON,
   },
   [WBTCUSDC_POOL]: {
     name: "WBTC/USDC Pool",
     decimals: 6,
     quoteAsset: "USDC",
+    icon: BTC_ICON,
   },
 };
 
