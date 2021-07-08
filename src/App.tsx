@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.css";
 import { Row, Col, PageHeader, Card } from "antd";
+import moment from "moment";
 import useVolOracles, { ORACLE_METADATA, Pools } from "./hooks/useVolOracles";
 import { formatUnits } from "@ethersproject/units";
+import OptionsPricer from "./components/OptionsPricer";
 
 function App() {
   const oracles = useVolOracles();
@@ -51,10 +53,29 @@ function App() {
                     )}{" "}
                     {quoteAsset}
                   </div>
+
+                  <div>
+                    Last Updated:{" "}
+                    {oracle.lastUpdateTimestamp > 0
+                      ? moment.unix(oracle.lastUpdateTimestamp).utc().fromNow()
+                      : "--"}
+                  </div>
                 </Card>
               </Col>
             );
           })}
+        </Row>
+
+        <Row style={{ marginTop: 60 }}>
+          <Col offset={1} span={5}>
+            <h1>Options Pricer</h1>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col offset={1} span={5}>
+            <OptionsPricer></OptionsPricer>
+          </Col>
         </Row>
       </div>
     </div>

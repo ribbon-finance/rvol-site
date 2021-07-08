@@ -29,6 +29,7 @@ export const ORACLE_METADATA = {
 interface OracleData {
   annualizedVol: BigNumber;
   lastTWAP: BigNumber;
+  lastUpdateTimestamp: number;
 }
 
 const useVolOracles = () => {
@@ -43,10 +44,12 @@ const useVolOracles = () => {
     [USDCETH_POOL]: {
       annualizedVol: BigNumber.from(0),
       lastTWAP: BigNumber.from(0),
+      lastUpdateTimestamp: 0,
     },
     [WBTCUSDC_POOL]: {
       annualizedVol: BigNumber.from(0),
       lastTWAP: BigNumber.from(0),
+      lastUpdateTimestamp: 0,
     },
   });
 
@@ -56,17 +59,26 @@ const useVolOracles = () => {
         [USDCETH_POOL]: {
           annualizedVol: BigNumber.from(0),
           lastTWAP: BigNumber.from(0),
+          lastUpdateTimestamp: 0,
         },
         [WBTCUSDC_POOL]: {
           annualizedVol: BigNumber.from(0),
           lastTWAP: BigNumber.from(0),
+          lastUpdateTimestamp: 0,
         },
       };
       for (let i = 0; i < pools.length; i++) {
         const pool = pools[i];
-        const promises = [oracle.annualizedVol(pool), oracle.lastPrices(pool)];
-        const [annualizedVol, lastTWAP] = await Promise.all(promises);
-        oraclesCopy[pool] = { annualizedVol, lastTWAP };
+        const promises = [
+          oracle.annualizedVol(pool),
+          oracle.lastPrices(pool),
+          oracle.accumulators(pool),
+        ];
+        const [annualizedVol, lastTWAP, accumulator] = await Promise.all(
+          promises
+        );
+        const lastUpdateTimestamp = accumulator.lastTimestamp;
+        oraclesCopy[pool] = { annualizedVol, lastTWAP, lastUpdateTimestamp };
       }
       setOracles(oraclesCopy);
     })();
