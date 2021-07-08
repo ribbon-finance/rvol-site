@@ -1,8 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import useVolOracles from "./hooks/useVolOracles";
 
 function App() {
+  const oracles = useVolOracles();
+
   return (
     <div className="App">
       <header className="App-header">
