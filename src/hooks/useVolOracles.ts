@@ -9,6 +9,19 @@ const WBTCUSDC_POOL = "0x99ac8cA7087fA4A2A1FB6357269965A2014ABc35";
 const pools = [USDCETH_POOL, WBTCUSDC_POOL] as const;
 export type Pools = typeof pools[number];
 
+export const ORACLE_METADATA = {
+  [USDCETH_POOL]: {
+    name: "USDC/ETH Pool",
+    decimals: 18,
+    quoteAsset: "ETH",
+  },
+  [WBTCUSDC_POOL]: {
+    name: "WBTC/USDC Pool",
+    decimals: 6,
+    quoteAsset: "USDC",
+  },
+};
+
 interface OracleData {
   annualizedVol: BigNumber;
   lastTWAP: BigNumber;
