@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { BigNumber, ethers } from "ethers";
 import moment from "moment";
 import { Row, Col, Button, Select, Radio, Form, DatePicker, Input } from "antd";
-import { ORACLE_METADATA, Pools } from "../hooks/useVolOracles";
+import { ORACLE_METADATA, Pools, USDCETH_POOL } from "../hooks/useVolOracles";
 import useProvider from "../hooks/useProvider";
 import OptionsPremiumPricerABI from "../abis/OptionsPremiumPricer.json";
 import { formatUnits } from "@ethersproject/units";
@@ -12,7 +12,7 @@ const { Option } = Select;
 const PRICER = "0x966878c047e3e4aDa52Baa93A94bc176FF67b2Dc";
 
 const OptionsPricer = () => {
-  const pools = Object.keys(ORACLE_METADATA) as Pools[];
+  const pools: Pools[] = [USDCETH_POOL];
   const [pool, setPool] = useState(pools[0]);
   const [expiry, setExpiry] = useState(moment().add(1, "weeks"));
   const [strike, setStrike] = useState("");

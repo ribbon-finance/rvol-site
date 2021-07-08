@@ -6,8 +6,8 @@ import ETH_ICON from "../img/eth.png";
 import BTC_ICON from "../img/btc.png";
 
 const VOL_ORACLE = "0x8eB47e59E0C03A7D1BFeaFEe6b85910Cefd0ee99";
-const USDCETH_POOL = "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8";
-const WBTCUSDC_POOL = "0x99ac8cA7087fA4A2A1FB6357269965A2014ABc35";
+export const USDCETH_POOL = "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8";
+export const WBTCUSDC_POOL = "0x99ac8cA7087fA4A2A1FB6357269965A2014ABc35";
 const pools = [USDCETH_POOL, WBTCUSDC_POOL] as const;
 export type Pools = typeof pools[number];
 
