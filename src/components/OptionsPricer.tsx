@@ -13,7 +13,7 @@ const PRICER = "0x966878c047e3e4aDa52Baa93A94bc176FF67b2Dc";
 
 const OptionsPricer = () => {
   const pools: Pools[] = [USDCETH_POOL];
-  const [pool, setPool] = useState(pools[0]);
+  const [, setPool] = useState(pools[0]);
   const [expiry, setExpiry] = useState(moment().add(1, "weeks"));
   const [strike, setStrike] = useState("");
   const [isPut, setIsPut] = useState(false);
