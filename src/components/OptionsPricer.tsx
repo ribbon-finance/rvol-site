@@ -2,25 +2,34 @@ import React, { useCallback, useState } from "react";
 import { BigNumber, ethers } from "ethers";
 import moment from "moment";
 import { Row, Col, Button, Select, Radio, Form, DatePicker, Input } from "antd";
-import { ORACLE_METADATA, Pools, USDCETH_POOL } from "../hooks/useVolOracles";
+import { ORACLE_METADATA, Pools, pools } from "../hooks/useVolOracles";
 import useProvider from "../hooks/useProvider";
 import OptionsPremiumPricerABI from "../abis/OptionsPremiumPricer.json";
 import { formatUnits } from "@ethersproject/units";
 
 const { Option } = Select;
 
-const PRICER = "0x966878c047e3e4aDa52Baa93A94bc176FF67b2Dc";
+const PRICERS_BY_POOL: { [pool in Pools]: string } = {
+  // ETH USDC pool
+  "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8":
+    "0x16Bc6DECA21B28D45233393553A9bf31792aE23C",
+  "0x99ac8cA7087fA4A2A1FB6357269965A2014ABc35":
+    "0x2843bD3BF280Aa37Cc3a7d6a85B6d8f2F23a7b83",
+};
 
 const OptionsPricer = () => {
-  const pools: Pools[] = [USDCETH_POOL];
-  const [, setPool] = useState(pools[0]);
+  const [pool, setPool] = useState<Pools>(pools[0]);
   const [expiry, setExpiry] = useState(moment().add(1, "weeks"));
   const [strike, setStrike] = useState("");
   const [isPut, setIsPut] = useState(false);
   const [premium, setPremium] = useState("0");
   const [delta, setDelta] = useState("0");
   const provider = useProvider();
-  const pricer = new ethers.Contract(PRICER, OptionsPremiumPricerABI, provider);
+  const pricer = new ethers.Contract(
+    PRICERS_BY_POOL[pool],
+    OptionsPremiumPricerABI,
+    provider
+  );
 
   const getPremium = useCallback(async () => {
     if (strike === "" || strike === "0") {

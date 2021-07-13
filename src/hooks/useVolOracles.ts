@@ -8,7 +8,7 @@ import BTC_ICON from "../img/btc.png";
 const VOL_ORACLE = "0x4df938e57fD4Ad1dFDdDEEb1B4cFAbAB19E33A0E";
 export const USDCETH_POOL = "0x8ad599c3A0ff1De082011EFDDc58f1908eb6e6D8";
 export const WBTCUSDC_POOL = "0x99ac8cA7087fA4A2A1FB6357269965A2014ABc35";
-const pools = [USDCETH_POOL, WBTCUSDC_POOL] as const;
+export const pools = [USDCETH_POOL, WBTCUSDC_POOL] as const;
 export type Pools = typeof pools[number];
 
 export const ORACLE_METADATA = {
