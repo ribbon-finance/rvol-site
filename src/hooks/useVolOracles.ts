@@ -15,12 +15,14 @@ export const ORACLE_METADATA = {
   [USDCETH_POOL]: {
     name: "USDC/ETH Pool",
     decimals: 18,
+    underlying: "ETH",
     quoteAsset: "ETH",
     icon: ETH_ICON,
   },
   [WBTCUSDC_POOL]: {
     name: "WBTC/USDC Pool",
     decimals: 6,
+    underlying: "WBTC",
     quoteAsset: "USDC",
     icon: BTC_ICON,
   },

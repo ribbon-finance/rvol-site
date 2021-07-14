@@ -30,6 +30,7 @@ const OptionsPricer = () => {
     OptionsPremiumPricerABI,
     provider
   );
+  const underlying = ORACLE_METADATA[pool].underlying;
 
   const getPremium = useCallback(async () => {
     if (strike === "" || strike === "0") {
@@ -118,7 +119,7 @@ const OptionsPricer = () => {
           {premium !== "0"
             ? `${parseFloat(formatUnits(BigNumber.from(premium), 18)).toFixed(
                 4
-              )} ${isPut ? "USDC" : "ETH"}`
+              )} ${isPut ? "USDC" : underlying}`
             : "--"}
         </div>
 
